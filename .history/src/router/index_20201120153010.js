@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Listing from "../views/Listing.vue";
 
 Vue.use(VueRouter);
 
@@ -7,7 +8,7 @@ const routes = [
   {
     path: "/",
     name: "Listing",
-    component: () => import("../views/Listing.vue")
+    component: Listing
   },
   {
     path: "/cart",
