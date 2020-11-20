@@ -27,7 +27,7 @@ export default new Vuex.Store({
       state.orders = [...state.orders, payload]
     },
     setListings(state, payload){
-      state.listings = [...state.listings, payload]
+      state.listings = payload
     }
   },
   actions: {

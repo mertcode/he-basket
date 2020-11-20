@@ -1,5 +1,19 @@
 <template>
   <div class="cart">
-    <h1>cart page</h1>
+    
   </div>
 </template>
+
+<script>
+
+  import { mapGetters } from 'vuex'
+
+  export default {
+    name: 'Cart',
+    computed: {
+      ...mapGetters({
+        orders: 'orders'
+      })
+    }
+  }
+</script>

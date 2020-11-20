@@ -1,11 +1,13 @@
 import axios from 'axios'
 
+const BASE_URL = 'https://nonchalant-fang.glitch.me'
+
 function getListings(){
-    return axios.get('https://nonchalant-fang.glitch.me/listing')
+    return axios.get(`${BASE_URL}/listing`)
 }
 
 function submitOrder(order){
-    return axios.post('https://nonchalant-fang.glitch.me/order', { order })
+    return axios.post(`${BASE_URL}/order`, { order })
 }
 
 export default {
