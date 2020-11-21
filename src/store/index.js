@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
 
     listings: [],
-    orders: []
+    orders: [],
+    feedback: ''
 
   },
   getters: {
@@ -17,7 +18,18 @@ export default new Vuex.Store({
       return state.listings
     },
     orders(state){
-      return state.orders
+      return state.orders.map(order => {
+        return {
+          ...order,
+          price: parseFloat(order.price) * order.amount
+        }
+      })
+    },
+    feedback(state){
+      return state.feedback
+    },
+    getCartItemById: (state) => (id) => {
+      return state.orders.find(order => order.id === id)
     }
 
   },
@@ -31,6 +43,23 @@ export default new Vuex.Store({
     },
     removeCartItem(state, payload){
       state.orders.splice(payload, 1)
+    },
+    setFeedback(state, payload){
+      state.feedback = payload
+    },
+    changeCartItemAmount(state, payload){
+
+      state.orders = state.orders.reduce((finalArray, currentItem) => {
+        let newAmount = currentItem.id === payload.id ? currentItem.amount + payload.amount : currentItem.amount
+        return [...finalArray, {
+          ...currentItem,
+          amount: newAmount ? newAmount : 1
+        }]
+      }, [])
+
+    },
+    clearCart(state){
+      state.orders = []
     }
 
   },
@@ -54,17 +83,37 @@ export default new Vuex.Store({
       }
 
     },
-    addToBasket({commit}, payload){
-      commit('addToBasket', payload)
+    addToBasket({commit, getters, dispatch}, payload){
+      const foundOrder = getters.getCartItemById(payload.id)
+
+      if(foundOrder){
+        dispatch('changeCartItemAmount', {
+          id: payload.id,
+          amount: 1
+        })
+      } else {
+        commit('addToBasket', {...payload, amount: 1})
+      }
+
+    },
+    changeCartItemAmount({commit}, payload){
+      commit('changeCartItemAmount', payload)
     },
     removeCartItem({commit}, payload){
       commit('removeCartItem', payload)
     },
-    async submitOrder(_ , orders){
+    setFeedback({commit}, payload){
+      commit('setFeedback', payload)
+    },
+    async submitOrder({commit} , orders){
       
       try {
 
         const response = await shopService.submitOrder(orders)
+
+        if(response.data.status === 'success'){
+          commit('clearCart')
+        }
 
         return response
 
