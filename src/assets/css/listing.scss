@@ -1,18 +1,19 @@
 .listing-wrapper {
+
     height: 100%;
     flex-wrap: wrap;
-    width: 50%;
+    width: 600px;
     margin:0 auto;
+    align-content: center;
 
     .listings {
-        border: 1px solid #dedede;
-        border-radius: 4px;
+        
+        border: 1px solid $gray-color;
         padding: 10px;
         flex-direction: column;
         min-width: 300px;
 
         &-image {
-            height: auto;
             width: 100px;
         }
         
@@ -28,6 +29,9 @@
             }
         }
 
-
     }
+}
+
+.loading {
+    height: 100%;
 }

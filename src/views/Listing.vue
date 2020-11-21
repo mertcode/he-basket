@@ -1,7 +1,7 @@
 <template>
   <div class="listing-wrapper flex-center" v-if="!loading">
 
-    <div class="listings flex-center" v-for="(listing, index) in listings" :key="index">
+    <div class="listings flex-center" v-for="listing in listings" :key="listing.id">
 
       <img class="listings-image" :src="listing.image" :alt="listing.name">
       <div class="listings-name">{{ listing.name }}</div>
@@ -13,12 +13,15 @@
           <span class="listings-price">{{ listing.price }}</span>
         </div>
 
-        <button @click="addItem(listing)">ADD TO BASKET</button>
+        <button class="btn btn-orange" @click="addItem(listing)">ADD TO BASKET</button>
 
       </div>
 
     </div>
 
+  </div>
+  <div class="flex-center loading" v-else>
+    Loading. This might take a few seconds...
   </div>
 </template>
 
