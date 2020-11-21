@@ -1,3 +1,91 @@
 .cart {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
     
+    .cart-items {
+
+        border: 1px solid $gray-color;
+        min-width: 350px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+
+        &-upper {
+            display: flex;
+            width: 100%;
+        }
+
+        &-image {
+            height: 120px;
+        }
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            font-size: 14px;
+            margin-left: $ml-2;
+        }
+
+        &-currency {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        &-actions {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 14px;
+            margin-top: 15px;
+
+            .counter {
+
+                button {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                    padding: 5px;
+                    border: 1px solid $gray-color;
+                    cursor: pointer;
+                    outline: none;
+    
+                }
+
+                input {
+                    width: 40px;
+                    text-align: center;
+                    padding: 5px;
+                    margin: 0 10px;
+                }
+            }
+
+            .remove {
+                cursor: pointer;
+                margin: 0 auto;
+
+                &:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .cart-actions {
+        justify-content: space-between;
+        margin: 20px 0;
+
+        .ml-2 {
+            margin-left: $ml-2
+        }
+    }
+
 }
