@@ -28,7 +28,11 @@ export default new Vuex.Store({
     },
     setListings(state, payload){
       state.listings = payload
+    },
+    removeCartItem(state, payload){
+      state.orders.splice(payload, 1)
     }
+
   },
   actions: {
 
@@ -45,6 +49,7 @@ export default new Vuex.Store({
       } catch(error) {
 
         console.log(error)
+        return error
 
       }
 
@@ -52,7 +57,10 @@ export default new Vuex.Store({
     addToBasket({commit}, payload){
       commit('addToBasket', payload)
     },
-    async submitOrder(_ ,{ orders }){
+    removeCartItem({commit}, payload){
+      commit('removeCartItem', payload)
+    },
+    async submitOrder(_ , orders){
       
       try {
 
@@ -62,6 +70,7 @@ export default new Vuex.Store({
 
       } catch(error) {
         console.log(error)
+        return error
       }
     }
 

@@ -6,8 +6,8 @@ function getListings(){
     return axios.get(`${BASE_URL}/listing`)
 }
 
-function submitOrder(order){
-    return axios.post(`${BASE_URL}/order`, { order })
+function submitOrder(orders){
+    return axios.post(`${BASE_URL}/order`, orders)
 }
 
 export default {
