@@ -1,5 +1,6 @@
 <template>
-  <div class="listing-wrapper flex-center" v-if="!loading">
+
+  <div class="listing-wrapper" v-if="listings.length">
 
     <div class="listings flex-center" v-for="listing in listings" :key="listing.id">
 
@@ -23,6 +24,7 @@
   <div class="flex-center loading" v-else>
     Loading. This might take a few seconds...
   </div>
+
 </template>
 
 <script>
@@ -36,25 +38,18 @@
         listings: 'listings'
       })
     },
-    data(){
-      return {
-        loading: false
-      }
-    },
     methods: {
       ...mapActions({
-        addToBasket: 'addToBasket'
+        addToBasket: 'addToBasket',
+        getListings: 'getListings'
       }),
-      addItem(item){
-        this.addToBasket(item)
-        this.$router.push({name: 'Cart'})
+      async addItem(item){
+        await this.addToBasket(item)
+        this.$router.push({name: 'Cart'}) 
       }
     },
     created(){
-      this.loading = true
-      this.$store.dispatch('getListings').then(() => {
-        this.loading = false
-      })
+      this.getListings()
     }
   }
 

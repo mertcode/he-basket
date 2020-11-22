@@ -2,16 +2,20 @@
 
     height: 100%;
     flex-wrap: wrap;
-    width: 600px;
+    max-width: 600px;
     margin:0 auto;
     align-content: center;
+    padding: 20px;
+    display: flex;
+
 
     .listings {
         
         border: 1px solid $gray-color;
         padding: 10px;
         flex-direction: column;
-        min-width: 300px;
+        flex: 0 50%;
+        width: 100%;
 
         &-image {
             width: 100px;
@@ -34,4 +38,15 @@
 
 .loading {
     height: 100%;
+}
+
+@media screen and (max-width: 745px) {
+    .listing-wrapper {
+        margin-top: 60px;
+        align-content: unset;
+
+        .listings {
+            flex: 0 100%;
+        }
+    }
 }

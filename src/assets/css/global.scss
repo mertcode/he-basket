@@ -31,6 +31,14 @@ html, body, #app {
             color: $btn-orange;
             background-color: #fff;
         }
+
+        &:disabled {
+            background-color: $gray-color;
+            border: 1px solid $gray-color;
+            color: #000;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
     }
 
     .btn-gray {

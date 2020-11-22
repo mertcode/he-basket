@@ -1,44 +1,47 @@
 <template>
 
-    <div class="cart">
+  <div class="cart">
 
-        <div class="title">MY CART ({{ orders.length }})</div>
+    <div class="title">MY CART ({{ orders.length }})</div>
 
-        <div class="cart-items" v-for="(order, index) in orders" :key="order.id">
-            <div class="cart-items-upper">
-                <img class="cart-items-image" :src="order.image" :alt="order.name">
-                <div class="cart-items-info">
-                    <div class="cart-items-name"> {{ order.name }} </div>
-                    <div class="cart-items-currency">
-                        {{ order.currency }}
-                        <span class="cart-items-price">{{ order.price.toFixed(2) }}</span>
-                    </div>
-                </div>
+    <div class="cart-items" v-for="order in orders" :key="order.id">
+      <div class="cart-items-upper">
+          <img class="cart-items-image" :src="order.image" :alt="order.name">
+          <div class="cart-items-info">
+            <div class="cart-items-name"> {{ order.name }} </div>
+            <div class="cart-items-currency">
+              {{ order.currency }}
+              <span class="cart-items-price">{{ order.price.toFixed(2) }}</span>
             </div>
+          </div>
+      </div>
 
-            <div class="cart-items-actions">
-                <div class="counter flex-center">
-                    <button class="flex-center" @click="decrement(order.id)">-</button>
-                    <input type="text" :value="order.amount">
-                    <button class="flex-center" @click="increment(order.id)">+</button>
-                </div>
-                <div class="remove" @click="removeCartItem(index)">
-                    Remove
-                </div>
-            </div>
-        
+      <div class="cart-items-actions">
+        <div class="counter flex-center">
+          <button class="flex-center" @click="decrement(order.id)">-</button>
+          <input type="text" :value="order.amount" disabled>
+          <button class="flex-center" @click="increment(order.id)">+</button>
         </div>
-
-        <div class="cart-actions flex-center">
-            <button class="btn btn-gray" @click="continueShopping">
-                CONTINUE SHOPPING
-            </button>
-            <button class="ml-2 btn btn-orange" @click="placeOrder">
-                PLACE ORDER
-            </button>
+        <div class="remove" @click="removeCartItem(index)">
+          Remove
         </div>
-
+      </div>
+    
     </div>
+
+    <div class="cart-actions flex-center">
+      <button 
+        :class="['btn', orders.length ? 'btn-gray' : 'btn-orange']"
+        @click="continueShopping" 
+        >
+        CONTINUE SHOPPING
+      </button>
+      <button class="ml-2 btn btn-orange" @click="placeOrder" :disabled="!orders.length">
+        PLACE ORDER
+      </button>
+    </div>
+
+  </div>
 
 </template>
 
